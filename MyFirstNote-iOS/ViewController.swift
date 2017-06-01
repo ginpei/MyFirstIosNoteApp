@@ -19,6 +19,8 @@ class ViewController: UIViewController, UITableViewDataSource {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNote))
         self.navigationItem.rightBarButtonItem = addButton
         self.navigationItem.leftBarButtonItem = editButtonItem
+        
+        load()
     }
     
     func addNote() {
@@ -30,6 +32,8 @@ class ViewController: UIViewController, UITableViewDataSource {
         data.insert(name, at: 0)
         let indexPath = IndexPath(row: 0, section: 0)
         table.insertRows(at: [indexPath], with: .automatic)
+        
+        save()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,6 +54,20 @@ class ViewController: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         data.remove(at: indexPath.row)
         table.deleteRows(at: [indexPath], with: .automatic)
+        
+        save()
+    }
+    
+    func save() {
+        UserDefaults.standard.set(data, forKey: "notes")
+        UserDefaults.standard.synchronize()
+    }
+    
+    func load() {
+        if let loadedData = UserDefaults.standard.value(forKey: "notes") as? [String] {
+            data = loadedData
+            table.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
