@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController, UITableViewDataSource {
     @IBOutlet weak var table: UITableView!
     var data = ["Apple", "Banana", "C..."]
+    var file:String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +20,9 @@ class ViewController: UIViewController, UITableViewDataSource {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNote))
         self.navigationItem.rightBarButtonItem = addButton
         self.navigationItem.leftBarButtonItem = editButtonItem
+        
+        let docDir = NSSearchPathForDirectoriesInDomains(.documentDirectory, .allDomainsMask, true)
+        file = docDir[0].appending("notes.txt")
         
         load()
     }
@@ -59,12 +63,12 @@ class ViewController: UIViewController, UITableViewDataSource {
     }
     
     func save() {
-        UserDefaults.standard.set(data, forKey: "notes")
-        UserDefaults.standard.synchronize()
+        let newData:NSArray = NSArray(array: data)
+        newData.write(toFile: file, atomically: true)
     }
     
     func load() {
-        if let loadedData = UserDefaults.standard.value(forKey: "notes") as? [String] {
+        if let loadedData = NSArray(contentsOfFile: file) as? [String] {
             data = loadedData
             table.reloadData()
         }
