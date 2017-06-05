@@ -35,6 +35,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             let index = indexPath.row
             data[index] = newRowText
             table.reloadData()
+            
+            save()
         }
     }
     
@@ -50,8 +52,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         table.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         
         self.performSegue(withIdentifier: "detail", sender: nil)
-        
-//        save()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
