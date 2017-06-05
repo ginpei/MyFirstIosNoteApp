@@ -19,6 +19,8 @@ class DetailViewController: UIViewController {
         
         // in case when set text before
         setText(text: text)
+        
+        textView.becomeFirstResponder()
     }
     
     func setText(text: String) {
