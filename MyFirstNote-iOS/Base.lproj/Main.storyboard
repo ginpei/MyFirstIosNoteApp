@@ -36,6 +36,7 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="g5g-BF-6gf"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="VaU-NK-Eic"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -50,11 +51,48 @@
                     <navigationItem key="navigationItem" id="M3j-KD-Woj"/>
                     <connections>
                         <outlet property="table" destination="bgf-Jk-bY2" id="5MP-EZ-9mN"/>
+                        <segue destination="155-In-Eqg" kind="show" identifier="detail" id="fjb-bV-TGp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1076" y="135.38230884557723"/>
+        </scene>
+        <!--Note-->
+        <scene sceneID="yYf-Gc-37b">
+            <objects>
+                <viewController title="Note" id="155-In-Eqg" customClass="DetailViewController" customModule="MyFirstNote_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7KN-j5-Nvf"/>
+                        <viewControllerLayoutGuide type="bottom" id="lLd-us-YW6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="6Bu-kT-GcC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="qw7-lx-lnR">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qw7-lx-lnR" firstAttribute="bottom" secondItem="lLd-us-YW6" secondAttribute="top" id="24C-tA-dY3"/>
+                            <constraint firstItem="qw7-lx-lnR" firstAttribute="top" secondItem="6Bu-kT-GcC" secondAttribute="top" id="dCz-ti-85g"/>
+                            <constraint firstAttribute="trailing" secondItem="qw7-lx-lnR" secondAttribute="trailing" id="e8K-XC-XKE"/>
+                            <constraint firstItem="qw7-lx-lnR" firstAttribute="leading" secondItem="6Bu-kT-GcC" secondAttribute="leading" id="y9w-Va-aTf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="textView" destination="qw7-lx-lnR" id="MHi-wA-yxN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="r1f-q2-vYL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2149.5999999999999" y="134.48275862068968"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Bnq-B3-nAF">

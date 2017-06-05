@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var table: UITableView!
     var data = ["Apple", "Banana", "C..."]
     var file:String!
@@ -36,8 +36,11 @@ class ViewController: UIViewController, UITableViewDataSource {
         data.insert(name, at: 0)
         let indexPath = IndexPath(row: 0, section: 0)
         table.insertRows(at: [indexPath], with: .automatic)
+        table.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         
-        save()
+        self.performSegue(withIdentifier: "detail", sender: nil)
+        
+//        save()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,6 +63,17 @@ class ViewController: UIViewController, UITableViewDataSource {
         table.deleteRows(at: [indexPath], with: .automatic)
         
         save()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.performSegue(withIdentifier: "detail", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let view = segue.destination as! DetailViewController
+        let index = table.indexPathForSelectedRow!.row
+        print(index)
+        view.setText(text: data[index])
     }
     
     func save() {
