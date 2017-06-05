@@ -12,6 +12,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet weak var table: UITableView!
     var data = ["Apple", "Banana", "C..."]
     var file:String!
+    var newRowText:String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         file = docDir[0].appending("notes.txt")
         
         load()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let indexPath = table.indexPathForSelectedRow {
+            let index = indexPath.row
+            data[index] = newRowText
+            table.reloadData()
+        }
     }
     
     func addNote() {
@@ -72,7 +83,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let view = segue.destination as! DetailViewController
         let index = table.indexPathForSelectedRow!.row
-        print(index)
+        view.masterView = self
         view.setText(text: data[index])
     }
     
