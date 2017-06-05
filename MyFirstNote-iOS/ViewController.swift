@@ -33,9 +33,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if let indexPath = table.indexPathForSelectedRow {
             let index = indexPath.row
-            data[index] = newRowText
-            table.reloadData()
             
+            if newRowText != "" {
+                data[index] = newRowText
+            }
+            else {
+                data.remove(at: index)
+            }
+            
+            table.reloadData()
             save()
         }
     }
